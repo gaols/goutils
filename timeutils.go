@@ -1,0 +1,73 @@
+package goutils
+
+import (
+	"time"
+	"strings"
+	"errors"
+	"fmt"
+)
+
+const (
+	LAYOUT_DATETIME1 = "2006-01-02 15:04:05"
+	LAYOUT_DATE1     = "2006-01-02"
+	TIME1            = "15:04:05"
+	LAYOUT_DATETIME2 = "2006/01/02 15:04:05"
+	LAYOUT_DATE2     = "2006/01/02"
+)
+
+func convertLayout(layout string) string {
+	parsedLayout := layout
+
+	switch layout {
+	case "-datetime":
+		parsedLayout = LAYOUT_DATETIME1
+	case "-datetime-":
+		parsedLayout = "2006-01-02 15:04"
+	case "-datetime--":
+		parsedLayout = "2006-01-02 15"
+	case "-date":
+		parsedLayout = LAYOUT_DATE1
+	case "-date-":
+		parsedLayout = "2006-01"
+	case "-date--":
+		parsedLayout = "2006"
+	case "/datetime":
+		parsedLayout = LAYOUT_DATETIME2
+	case "/datetime-":
+		parsedLayout = "2006/01/02 15:04"
+	case "/date":
+		parsedLayout = LAYOUT_DATE2
+	case "/date-":
+		parsedLayout = "2006/01"
+	case "/date--":
+		parsedLayout = "2006"
+	case "time":
+		parsedLayout = TIME1
+	case "time-":
+		parsedLayout = "15:04"
+	case "time--":
+		parsedLayout = "15"
+	}
+
+	return parsedLayout
+}
+
+// FmtTime format time by specified layout.
+func FmtTime(time time.Time, layout string) (string, error) {
+	parsedLayout := convertLayout(layout)
+	if strings.TrimSpace(parsedLayout) == "" {
+		return "", errors.New(fmt.Sprintf("Invalid layout format: %s", layout))
+	}
+
+	return time.Format(parsedLayout), nil
+}
+
+// FmtTime format time by specified layout, will panic if layout is invalid.
+func MustFmtTime(time time.Time, layout string) string {
+	parsedLayout := convertLayout(layout)
+	if strings.TrimSpace(parsedLayout) == "" {
+		panic(fmt.Sprintf("time layout[%s] invalid", layout))
+	}
+
+	return time.Format(parsedLayout)
+}
