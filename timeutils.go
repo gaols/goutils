@@ -64,10 +64,34 @@ func FmtTime(time time.Time, layout string) (string, error) {
 
 // FmtTime format time by specified layout, will panic if layout is invalid.
 func MustFmtTime(time time.Time, layout string) string {
-	parsedLayout := convertLayout(layout)
-	if strings.TrimSpace(parsedLayout) == "" {
-		panic(fmt.Sprintf("time layout[%s] invalid", layout))
+	ti, err := FmtTime(time, layout)
+	if err != nil {
+		panic(fmt.Sprintf("Format time failed with layout: %s", layout))
 	}
 
-	return time.Format(parsedLayout)
+	return ti
+}
+
+// Parse time with zone set to local.
+// parsable layout can be [-datetime|-datetime-|-datetime--|-date|-date-|-date--|time|time-|time--]
+// and any other layout format that can pass to time.ParseInLocation
+func ParseLocaltime(toParseTime, layout string) (time.Time, error) {
+	parsedLayout := convertLayout(layout)
+	if strings.TrimSpace(parsedLayout) == "" {
+		return time.Time{}, errors.New(fmt.Sprintf("Invalid layout format: %s", layout))
+	}
+
+	return time.ParseInLocation(parsedLayout, toParseTime, time.Now().Location())
+}
+
+// Parse time with zone set to local, will panic if layout specified is invalid.
+// parsable layout can be [-datetime|-datetime-|-datetime--|-date|-date-|-date--|time|time-|time--]
+// and any other layout format that can pass to time.ParseInLocation
+func MustParseLocaltime(toParseTime, layout string) time.Time {
+	ti, err := ParseLocaltime(toParseTime, layout)
+	if err != nil {
+		panic(fmt.Sprintf("Parse local time failed with format :%s", layout))
+	}
+
+	return ti
 }
