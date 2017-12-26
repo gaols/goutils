@@ -1,6 +1,9 @@
 package goutils
 
-import "strings"
+import (
+	"strings"
+	"unicode/utf8"
+)
 
 // IsBlank Checks if a string is whitespace, empty ("").
 func IsBlank(str string) bool {
@@ -45,4 +48,35 @@ func DefaultIfBlank(str, defaultStr string) string {
 	}
 
 	return str
+}
+
+// Left pad a String with a specified character.
+// WARNING: string is uft8-encoded!
+//
+// stringutils.LeftPad("", 3, "z")     = "zzz"
+// stringutils.LeftPad("bat", 3, "z")  = "bat"
+// stringutils.LeftPad("bat", 5, "z")  = "zzbat"
+// stringutils.LeftPad("bat", 1, "z")  = "bat"
+// stringutils.LeftPad("bat", -1, "z") = "bat"
+func LeftPad(str string, size int, padChar rune) string {
+	return calcPadStr(str, size, padChar) + str
+}
+
+// RightPad right pad a String with a specified character.
+// WARNING: string is uft8-encoded!
+// StringUtils.rightPad("", 3, 'z')     = "zzz"
+// StringUtils.rightPad("bat", 3, 'z')  = "bat"
+// StringUtils.rightPad("bat", 5, 'z')  = "batzz"
+// StringUtils.rightPad("bat", 1, 'z')  = "bat"
+// StringUtils.rightPad("bat", -1, 'z') = "bat"
+func RightPad(str string, size int, padChar rune) string {
+	return str + calcPadStr(str, size, padChar)
+}
+
+func calcPadStr(str string, size int, padChar rune) string {
+	count := utf8.RuneCountInString(str)
+	if size <= count {
+		return ""
+	}
+	return strings.Repeat(string(padChar), size - count)
 }

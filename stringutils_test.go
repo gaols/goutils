@@ -1,6 +1,8 @@
 package goutils
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestIsBlank(t *testing.T) {
 	if !IsBlank("") {
@@ -34,6 +36,96 @@ func TestDefaultIfEmpty(t *testing.T) {
 
 func TestDefaultIfBlank(t *testing.T) {
 	if DefaultIfBlank(" \t\r", "foo") != "foo" {
+		t.FailNow()
+	}
+}
+
+func TestIsNotEmpty(t *testing.T) {
+	if !IsNotEmpty(" ") || !IsNotEmpty("\n") || !IsNotEmpty("\r") || !IsNotEmpty("\t") {
+		t.FailNow()
+	}
+}
+
+func TestIsNotBlank(t *testing.T) {
+	if IsNotBlank(" ") {
+		t.FailNow()
+	}
+}
+
+func TestRightPad(t *testing.T) {
+	if "hello  " != RightPad("hello", 7, ' ') {
+		t.FailNow()
+	}
+	if "猴王王王王王王" != RightPad("猴王", 7, '王') {
+		t.FailNow()
+	}
+	if "猴王     " != RightPad("猴王", 7, ' ') {
+		t.FailNow()
+	}
+	if "猴王" != RightPad("猴王", 2, ' ') {
+		t.FailNow()
+	}
+	if "猴王" != RightPad("猴王", 1, ' ') {
+		t.FailNow()
+	}
+	if "猴王" != RightPad("猴王", 0, ' ') {
+		t.FailNow()
+	}
+	if "猴王" != RightPad("猴王", -1, ' ') {
+		t.FailNow()
+	}
+	if "ab" != RightPad("ab", 2, ' ') {
+		t.FailNow()
+	}
+	if "ab" != RightPad("ab", 1, ' ') {
+		t.FailNow()
+	}
+	if "ab" != RightPad("ab", 0, ' ') {
+		t.FailNow()
+	}
+	if "ab" != RightPad("ab", -1, ' ') {
+		t.FailNow()
+	}
+	if "hello,猴王 强" != RightPad("hello,猴王 ", 10, '强') {
+		t.FailNow()
+	}
+}
+
+func TestLeftPad(t *testing.T) {
+	if "  hello" != LeftPad("hello", 7, ' ') {
+		t.FailNow()
+	}
+	if "王王王王王猴王" != LeftPad("猴王", 7, '王') {
+		t.FailNow()
+	}
+	if "     猴王" != LeftPad("猴王", 7, ' ') {
+		t.FailNow()
+	}
+	if "猴王" != LeftPad("猴王", 2, ' ') {
+		t.FailNow()
+	}
+	if "猴王" != LeftPad("猴王", 1, ' ') {
+		t.FailNow()
+	}
+	if "猴王" != LeftPad("猴王", 0, ' ') {
+		t.FailNow()
+	}
+	if "猴王" != LeftPad("猴王", -1, ' ') {
+		t.FailNow()
+	}
+	if "ab" != LeftPad("ab", 2, ' ') {
+		t.FailNow()
+	}
+	if "ab" != LeftPad("ab", 1, ' ') {
+		t.FailNow()
+	}
+	if "ab" != LeftPad("ab", 0, ' ') {
+		t.FailNow()
+	}
+	if "ab" != LeftPad("ab", -1, ' ') {
+		t.FailNow()
+	}
+	if "强hello,猴王 " != LeftPad("hello,猴王 ", 10, '强') {
 		t.FailNow()
 	}
 }
