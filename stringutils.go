@@ -3,6 +3,7 @@ package goutils
 import (
 	"strings"
 	"unicode/utf8"
+	"unicode"
 )
 
 // IsBlank Checks if a string is whitespace, empty ("").
@@ -64,7 +65,7 @@ func LeftPad(str string, size int, padChar rune) string {
 
 // RightPad right pad a String with a specified character.
 // WARNING: string to pad should be uft8-encoded!
-
+//
 // goutils.RightPad("", 3, 'z')     = "zzz"
 // goutils.RightPad("bat", 3, 'z')  = "bat"
 // goutils.RightPad("bat", 5, 'z')  = "batzz"
@@ -79,5 +80,48 @@ func calcPadStr(str string, size int, padChar rune) string {
 	if size <= count {
 		return ""
 	}
-	return strings.Repeat(string(padChar), size - count)
+	return strings.Repeat(string(padChar), size-count)
+}
+
+// Reverse reverse a string.
+// WARNING: This does not work with combining characters. check
+// https://stackoverflow.com/questions/1752414/how-to-reverse-a-string-in-go for more stories.
+//
+// goutils.Reverse("hello") = "olleh"
+func Reverse(s string) string {
+	runes := []rune(s)
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+	return string(runes)
+}
+
+// Reverse reverse a string preserving combining characters.
+// The implementation is copied from http://rosettacode.org/wiki/Reverse_a_string#Go
+// goutils.ReversePreservingCombiningCharacters("The quick bròwn 狐 jumped over the lazy 犬") = "犬 yzal eht revo depmuj 狐 nwòrb kciuq ehT"
+func ReversePreservingCombiningCharacters(s string) string {
+	if s == "" {
+		return ""
+	}
+	p := []rune(s)
+	r := make([]rune, len(p))
+	start := len(r)
+	for i := 0; i < len(p); {
+		// quietly skip invalid UTF-8
+		if p[i] == utf8.RuneError {
+			i++
+			continue
+		}
+		j := i + 1
+		for j < len(p) && (unicode.Is(unicode.Mn, p[j]) ||
+			unicode.Is(unicode.Me, p[j]) || unicode.Is(unicode.Mc, p[j])) {
+			j++
+		}
+		for k := j - 1; k >= i; k-- {
+			start--
+			r[start] = p[k]
+		}
+		i = j
+	}
+	return string(r[start:])
 }

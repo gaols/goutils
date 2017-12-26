@@ -129,3 +129,18 @@ func TestLeftPad(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestReverse(t *testing.T) {
+	if Reverse("hello") != "olleh" {
+		t.FailNow()
+	}
+	if Reverse("落霞与孤鹜齐飞") != "飞齐鹜孤与霞落" {
+		t.FailNow()
+	}
+}
+
+func TestReversePreservingCombiningCharacters(t *testing.T) {
+	if ReversePreservingCombiningCharacters("The quick bròwn 狐 jumped over the lazy 犬") != "犬 yzal eht revo depmuj 狐 nwòrb kciuq ehT" {
+		t.FailNow()
+	}
+}
