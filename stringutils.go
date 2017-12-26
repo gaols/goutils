@@ -51,7 +51,7 @@ func DefaultIfBlank(str, defaultStr string) string {
 }
 
 // Left pad a String with a specified character.
-// WARNING: string is uft8-encoded!
+// WARNING: string to pad should be uft8-encoded!
 //
 // goutils.LeftPad("", 3, 'z')     = "zzz"
 // goutils.LeftPad("bat", 3, 'z')  = "bat"
@@ -63,12 +63,13 @@ func LeftPad(str string, size int, padChar rune) string {
 }
 
 // RightPad right pad a String with a specified character.
-// WARNING: string is uft8-encoded!
-// goutils.rightPad("", 3, 'z')     = "zzz"
-// goutils.rightPad("bat", 3, 'z')  = "bat"
-// goutils.rightPad("bat", 5, 'z')  = "batzz"
-// goutils.rightPad("bat", 1, 'z')  = "bat"
-// goutils.rightPad("bat", -1, 'z') = "bat"
+// WARNING: string to pad should be uft8-encoded!
+
+// goutils.RightPad("", 3, 'z')     = "zzz"
+// goutils.RightPad("bat", 3, 'z')  = "bat"
+// goutils.RightPad("bat", 5, 'z')  = "batzz"
+// goutils.RightPad("bat", 1, 'z')  = "bat"
+// goutils.RightPad("bat", -1, 'z') = "bat"
 func RightPad(str string, size int, padChar rune) string {
 	return str + calcPadStr(str, size, padChar)
 }
