@@ -7,42 +7,36 @@ import (
 	"fmt"
 )
 
-const (
-	LAYOUT_DATETIME1 = "2006-01-02 15:04:05"
-	LAYOUT_DATE1     = "2006-01-02"
-	TIME1            = "15:04:05"
-	LAYOUT_DATETIME2 = "2006/01/02 15:04:05"
-	LAYOUT_DATE2     = "2006/01/02"
-)
-
 func convertLayout(layout string) string {
 	parsedLayout := layout
 
 	switch layout {
 	case "-datetime":
-		parsedLayout = LAYOUT_DATETIME1
+		parsedLayout = "2006-01-02 15:04:05"
 	case "-datetime-":
 		parsedLayout = "2006-01-02 15:04"
 	case "-datetime--":
 		parsedLayout = "2006-01-02 15"
 	case "-date":
-		parsedLayout = LAYOUT_DATE1
+		parsedLayout = "2006-01-02"
 	case "-date-":
 		parsedLayout = "2006-01"
 	case "-date--":
 		parsedLayout = "2006"
 	case "/datetime":
-		parsedLayout = LAYOUT_DATETIME2
+		parsedLayout = "2006/01/02 15:04:05"
 	case "/datetime-":
 		parsedLayout = "2006/01/02 15:04"
+	case "/datetime--":
+		parsedLayout = "2006/01/02 15"
 	case "/date":
-		parsedLayout = LAYOUT_DATE2
+		parsedLayout = "2006/01/02"
 	case "/date-":
 		parsedLayout = "2006/01"
 	case "/date--":
 		parsedLayout = "2006"
 	case "time":
-		parsedLayout = TIME1
+		parsedLayout = "15:04:05"
 	case "time-":
 		parsedLayout = "15:04"
 	case "time--":
