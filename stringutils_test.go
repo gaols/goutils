@@ -144,3 +144,42 @@ func TestReversePreservingCombiningCharacters(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestIsAnyBlank(t *testing.T) {
+	if IsAnyBlank("a", "b") {
+		t.FailNow()
+	}
+	if !IsAnyBlank("a", "") {
+		t.FailNow()
+	}
+	if IsAnyBlank("a") {
+		t.FailNow()
+	}
+}
+
+func TestSubstring(t *testing.T) {
+	if Substring("hello", -1, -1) != "hello" {
+		t.FailNow()
+	}
+	if Substring("hello", 0, -1) != "hello" {
+		t.FailNow()
+	}
+	if Substring("hello", -1, 10) != "hello" {
+		t.FailNow()
+	}
+	if Substring("hello", 10, 11) != "" {
+		t.FailNow()
+	}
+	if Substring("hello", 4, 3) != "" {
+		t.FailNow()
+	}
+	if Substring("hello", 3, 4) != "l" {
+		t.FailNow()
+	}
+	if Substring("hello", 3, 3) != "" {
+		t.FailNow()
+	}
+	if Substring("hello", 0, 1) != "h" {
+		t.FailNow()
+	}
+}

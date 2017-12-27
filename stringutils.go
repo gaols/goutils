@@ -26,6 +26,20 @@ func IsNotEmpty(str string) bool {
 	return !IsEmpty(str)
 }
 
+// IsAnyBlank checks if any one of the CharSequences are blank ("") or whitespace only.
+func IsAnyBlank(strList ...string) bool {
+	if len(strList) == 0 {
+		panic("no param found")
+	}
+
+	for _, v := range strList {
+		if IsBlank(v) {
+			return true
+		}
+	}
+	return false
+}
+
 // Trim returns a slice of the string s, with all leading and trailing white space removed, as defined by Unicode.
 func Trim(str string) string {
 	return strings.TrimSpace(str)
@@ -124,4 +138,32 @@ func ReversePreservingCombiningCharacters(s string) string {
 		i = j
 	}
 	return string(r[start:])
+}
+
+// Substring Returns a substring of str in range(i, j).
+func Substring(str string, i, j int) string {
+	runes := []rune(str)
+	if i >= len(str) {
+		return ""
+	}
+	if j > len(str) {
+		j = len(str)
+	}
+
+	ld := i >= 0
+	rd := j >= 0
+	if ld && rd {
+		if j <= i {
+			return ""
+		}
+		return string(runes[i:j])
+	}
+
+	if ld {
+		return string(runes[i:])
+	} else if rd {
+		return string(runes[:j])
+	}
+
+	return str
 }

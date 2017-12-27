@@ -22,4 +22,11 @@ goutils.IsBlank(" ") // out: true
 goutils.IsBlank("a") // out: false
 goutils.IsEmpty("")  // out: true
 goutils.IsEmpty(" ") // out: false
+goutils.DefaultIfBlank(" ", "hello") // out: hello
+goutils.DefaultIfBlank("c", "hello") // out: c
+goutils.DefaultIfEmpty("", "hello")  // out: hello
+goutils.DefaultIfEmpty("c", "hello") // out: c
+goutils.Substring("hello", 0, 1)     // out: h
+goutils.IsAnyBlank("hello", "")      // out: true
+goutils.IsAnyBlank("hello")          // out: false
 ```
