@@ -49,7 +49,7 @@ goutils.FmtTime(time.Now(), "time-")          // out: 21:15
 goutils.FmtTime(time.Now(), "time--")         // out: 21
 
 goutils.FmtTime(time.Now(), "/datetime")      // out: 2017/12/27 21:15:15
-goutils.FmtTime(time.Now(), "-datetime-")     // out: 2017/12/27 21:15
+goutils.FmtTime(time.Now(), "/datetime-")     // out: 2017/12/27 21:15
 goutils.FmtTime(time.Now(), "/datetime--")    // out: 2017/12/27 21
 goutils.FmtTime(time.Now(), "/date")          // out: 2017/12/27
 
