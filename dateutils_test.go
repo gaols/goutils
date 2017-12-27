@@ -42,3 +42,24 @@ func TestEndingOfDate(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestDaysBetween(t *testing.T) {
+	if DaysBetween(Today(), Yesterday()) != -1 {
+		t.FailNow()
+	}
+	if DaysBetween(Yesterday(), Today()) != 1 {
+		t.FailNow()
+	}
+	if DaysBetween(Yesterday().Add(time.Minute), Today()) != 1 {
+		t.FailNow()
+	}
+	if DaysBetween(Today().Add(time.Second), Yesterday()) != -1 {
+		t.FailNow()
+	}
+	if DaysBetween(Today(), Today()) != 0 {
+		t.FailNow()
+	}
+	if DaysBetween(Today(), Today().Add(time.Millisecond)) != 0 {
+		t.FailNow()
+	}
+}
