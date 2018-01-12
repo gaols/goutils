@@ -21,6 +21,13 @@ func TestFmtTime(t *testing.T) {
 	if ft != "2017-12-23 12:06" {
 		t.FailNow()
 	}
+	ft, err = FmtTime(ti, "datetime")
+	if err != nil {
+		t.FailNow()
+	}
+	if ft != "20171223120606" {
+		t.FailNow()
+	}
 	ft, err = FmtTime(ti, "-datetime--")
 	if err != nil {
 		t.FailNow()

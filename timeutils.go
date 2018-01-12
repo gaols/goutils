@@ -11,6 +11,8 @@ func convertLayout(layout string) string {
 	parsedLayout := layout
 
 	switch layout {
+	case "datetime":
+		parsedLayout = "20060102150405"
 	case "-datetime":
 		parsedLayout = "2006-01-02 15:04:05"
 	case "-datetime-":
