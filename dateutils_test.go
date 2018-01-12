@@ -47,6 +47,9 @@ func TestDaysBetween(t *testing.T) {
 	if DaysBetween(Today(), Yesterday()) != -1 {
 		t.FailNow()
 	}
+	if DaysBetween(time.Now(), Tomorrow()) != 1 {
+		t.FailNow()
+	}
 	if DaysBetween(Yesterday(), Today()) != 1 {
 		t.FailNow()
 	}

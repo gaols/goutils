@@ -183,3 +183,14 @@ func TestSubstring(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestJoinSqlInParam(t *testing.T) {
+	ins := []string{"1", "2"}
+	if JoinSqlInParam(ins) != "('1','2')" {
+		t.FailNow()
+	}
+	ins = []string{"1"}
+	if JoinSqlInParam(ins) != "('1')" {
+		t.FailNow()
+	}
+}
