@@ -21,6 +21,8 @@ func convertLayout(layout string) string {
 		parsedLayout = "2006-01-02 15"
 	case "-date":
 		parsedLayout = "2006-01-02"
+	case "date":
+		parsedLayout = "20060102"
 	case "-date-":
 		parsedLayout = "2006-01"
 	case "-date--":
