@@ -26,7 +26,7 @@ func (set *Stringset) toSlice() []string {
 }
 
 func (set *Stringset) Add(c string) {
-	set.s[c] = val
+	set.s[c] = true
 }
 
 func (set *Stringset) Remove(c string) {

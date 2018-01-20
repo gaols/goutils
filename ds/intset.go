@@ -1,7 +1,5 @@
 package ds
 
-const val = true
-
 type Intset struct {
 	s map[int]bool
 }
@@ -28,7 +26,7 @@ func (set *Intset) toSlice() []int {
 }
 
 func (set *Intset) Add(c int) {
-	set.s[c] = val
+	set.s[c] = true
 }
 
 func (set *Intset) Remove(c int) {
