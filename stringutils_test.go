@@ -194,3 +194,21 @@ func TestJoinSqlInParam(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestIsEqualsAny(t *testing.T) {
+	if !IsEqualsAny("", "") {
+		t.FailNow()
+	}
+	if IsEqualsAny("") {
+		t.FailNow()
+	}
+	if !IsEqualsAny("a", "a", "b") {
+		t.FailNow()
+	}
+	if !IsEqualsAny("a", "a") {
+		t.FailNow()
+	}
+	if IsEqualsAny("a", "b") {
+		t.FailNow()
+	}
+}

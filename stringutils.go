@@ -178,3 +178,12 @@ func JoinSqlInParam(ins []string) string {
 	}
 	return "(" + strings.Join(ins2, ",") + ")"
 }
+
+func IsEqualsAny(val string, vals ...string) bool {
+	for _, v := range vals {
+		if val == v {
+			return true
+		}
+	}
+	return false
+}
