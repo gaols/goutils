@@ -53,7 +53,6 @@ func DaysAfter(t time.Time, days int) time.Time {
 // Calc days between two days.
 // goutils.DaysBetween(goutils.Yesterday(), goutils.Today()) = 1
 // goutils.DaysBetween(goutils.Today(), goutils.Yesterday()) = -1
-// goutils.DaysBetween(goutils.Today(), goutils.Yesterday()) = -1
 func DaysBetween(startTime, endTime time.Time) int {
 	diff := BeginningOfDate(endTime).Sub(BeginningOfDate(startTime))
 	return int(diff.Hours() / 24)
