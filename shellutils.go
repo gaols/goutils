@@ -13,6 +13,7 @@ const (
 	TYPE_STDERR = 1
 )
 
+// Local run the command in localhost
 // https://studygolang.com/articles/4004   <- run shell command and read output line by line
 // https://studygolang.com/articles/7767   <- run command without known args
 func Local(localCmd string, paras ...interface{}) (out string, err error) {
@@ -23,6 +24,7 @@ func Local(localCmd string, paras ...interface{}) (out string, err error) {
 	return
 }
 
+// RtLocal run the command in localhost and get command output realtime.
 func RtLocal(localCmd string, lineHandler func(line string, lineType int8), paras ...interface{}) error {
 	localCmd = fmt.Sprintf(localCmd, paras...)
 	cmd := exec.Command("/bin/bash", "-c", localCmd)
