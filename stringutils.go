@@ -110,7 +110,7 @@ func Reverse(s string) string {
 	return string(runes)
 }
 
-// Reverse reverse a string preserving combining characters.
+// ReversePreservingCombiningCharacters reverse a string preserving combining characters.
 // The implementation is copied from http://rosettacode.org/wiki/Reverse_a_string#Go
 // goutils.ReversePreservingCombiningCharacters("The quick bròwn 狐 jumped over the lazy 犬") = "犬 yzal eht revo depmuj 狐 nwòrb kciuq ehT"
 func ReversePreservingCombiningCharacters(s string) string {
