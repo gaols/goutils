@@ -1,10 +1,9 @@
 package goutils
 
 import (
-	"time"
-	"strings"
-	"errors"
 	"fmt"
+	"strings"
+	"time"
 )
 
 func convertLayout(layout string) string {
@@ -54,13 +53,13 @@ func convertLayout(layout string) string {
 func FmtTime(time time.Time, layout string) (string, error) {
 	parsedLayout := convertLayout(layout)
 	if strings.TrimSpace(parsedLayout) == "" {
-		return "", errors.New(fmt.Sprintf("Invalid layout format: %s", layout))
+		return "", fmt.Errorf("Invalid layout format: %s", layout)
 	}
 
 	return time.Format(parsedLayout), nil
 }
 
-// FmtTime format time by specified layout, will panic if layout is invalid.
+// MustFmtTime format time by specified layout, will panic if layout is invalid.
 func MustFmtTime(time time.Time, layout string) string {
 	ti, err := FmtTime(time, layout)
 	if err != nil {
@@ -70,19 +69,19 @@ func MustFmtTime(time time.Time, layout string) string {
 	return ti
 }
 
-// Parse time with zone set to local.
+// ParseLocaltime time with zone set to local.
 // parsable layout can be [-datetime|-datetime-|-datetime--|-date|-date-|-date--|time|time-|time--]
 // and any other layout format that can pass to time.ParseInLocation
 func ParseLocaltime(toParseTime, layout string) (time.Time, error) {
 	parsedLayout := convertLayout(layout)
 	if strings.TrimSpace(parsedLayout) == "" {
-		return time.Time{}, errors.New(fmt.Sprintf("Invalid layout format: %s", layout))
+		return time.Time{}, fmt.Errorf("Invalid layout format: %s", layout)
 	}
 
 	return time.ParseInLocation(parsedLayout, toParseTime, time.Now().Location())
 }
 
-// Parse time with zone set to local, will panic if layout specified is invalid.
+// MustParseLocaltime time with zone set to local, will panic if layout specified is invalid.
 // parsable layout can be [-datetime|-datetime-|-datetime--|-date|-date-|-date--|time|time-|time--]
 // and any other layout format that can pass to time.ParseInLocation
 func MustParseLocaltime(toParseTime, layout string) time.Time {
