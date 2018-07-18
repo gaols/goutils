@@ -179,6 +179,7 @@ func JoinSqlInParam(ins []string) string {
 	return "(" + strings.Join(ins2, ",") + ")"
 }
 
+// IsEqualsAny tests whether a string equals any string provided.
 func IsEqualsAny(val string, vals ...string) bool {
 	for _, v := range vals {
 		if val == v {
