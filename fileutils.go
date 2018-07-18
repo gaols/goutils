@@ -27,6 +27,7 @@ func ReadLine(filepath string, handler func(line string, index uint64)) error {
 	return nil
 }
 
+// IsFileExists tests existence of specified file.
 func IsFileExists(filepath string) bool {
 	_, err := os.Stat(filepath)
 	if err == nil {
@@ -35,6 +36,7 @@ func IsFileExists(filepath string) bool {
 	return os.IsExist(err)
 }
 
+// RemoveTrailingSlash remove the last slash of a path except the root path.
 func RemoveTrailingSlash(path string) string {
 	if len(path) > 1 && strings.HasSuffix(path, "/") {
 		return path[:len(path)-1]
@@ -42,6 +44,7 @@ func RemoveTrailingSlash(path string) string {
 	return path
 }
 
+// IsDir tests whether a path is dir or not, true if path is dir, false otherwise.
 func IsDir(path string) bool {
 	stat, err := os.Stat(path)
 	if err != nil {
@@ -52,6 +55,7 @@ func IsDir(path string) bool {
 	return mode.IsDir()
 }
 
+// IsRegular tests whether a path is a regular file.
 func IsRegular(path string) bool {
 	stat, err := os.Stat(path)
 	if err != nil {
