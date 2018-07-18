@@ -11,7 +11,7 @@ func IsBlank(str string) bool {
 	return len(strings.TrimSpace(str)) == 0
 }
 
-// IsBlank Checks if a string is not empty (""), not null and not whitespace only.
+// IsNotBlank Checks if a string is not empty (""), not null and not whitespace only.
 func IsNotBlank(str string) bool {
 	return !IsBlank(str)
 }
@@ -65,7 +65,7 @@ func DefaultIfBlank(str, defaultStr string) string {
 	return str
 }
 
-// Left pad a String with a specified character.
+// LeftPad pad a String with a specified character on the left.
 // WARNING: string to pad should be uft8-encoded!
 //
 // goutils.LeftPad("", 3, 'z')     = "zzz"
