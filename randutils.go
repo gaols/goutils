@@ -16,13 +16,13 @@ const (
 )
 
 // RandDuration generate presudo time duration between lower and upper with lower and upper bound inclusively.
-func RandDuration(lower, upper, timeUintType int) time.Duration {
+func RandDuration(lower, upper, timeUnitType int) time.Duration {
 	if upper < lower {
 		panic("upper bound should gt lower bound")
 	}
 
 	d := time.Second
-	switch timeUintType {
+	switch timeUnitType {
 	case TimeUnitTypeSecond:
 		d = time.Second
 	case TimeUnitTypeMinute:
@@ -30,7 +30,7 @@ func RandDuration(lower, upper, timeUintType int) time.Duration {
 	case TimeUnitTypeHour:
 		d = time.Hour
 	default:
-		panic(fmt.Sprintf("invalid time unit type: %d", timeUintType))
+		panic(fmt.Sprintf("invalid time unit type: %d", timeUnitType))
 	}
 
 	return time.Duration(rand.Intn(upper-lower)+lower) * d
