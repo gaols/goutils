@@ -48,7 +48,7 @@ func RemoveTrailingSlash(path string) string {
 func IsDir(path string) bool {
 	stat, err := os.Stat(path)
 	if err != nil {
-		panic("error: " + err.Error())
+		return false
 	}
 
 	mode := stat.Mode()
@@ -59,7 +59,7 @@ func IsDir(path string) bool {
 func IsRegular(path string) bool {
 	stat, err := os.Stat(path)
 	if err != nil {
-		panic("error: " + err.Error())
+		return false
 	}
 
 	mode := stat.Mode()
