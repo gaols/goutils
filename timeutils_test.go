@@ -58,6 +58,14 @@ func TestMustFmtTime(t *testing.T) {
 	if ft != "2017/12/23 12:06:06" {
 		t.FailNow()
 	}
+	ft = MustFmtTime(ti, "-datetime")
+	if ft != "2017-12-23 12:06:06" {
+		t.FailNow()
+	}
+	ft = MustFmtTime(ti, ".datetime")
+	if ft != "2017.12.23 12:06:06" {
+		t.FailNow()
+	}
 }
 
 func TestMustParseLocaltime(t *testing.T) {
