@@ -9,6 +9,21 @@ func BeginningOfDate(t time.Time) time.Time {
 	return time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location())
 }
 
+// BeginningOfThisWeek returns the beginning date of this week.
+func BeginningOfThisWeek() time.Time {
+	return BeginningOfWeek(time.Now())
+}
+
+// BeginningOfWeek return the first date of the week where t belongs to.
+func BeginningOfWeek(t time.Time) time.Time {
+	wd := int(t.Weekday())
+	if wd == 0 {
+		wd = 7
+	}
+	d := t.AddDate(0, 0, -wd + 1)
+	return BeginningOfDate(d)
+}
+
 // EndingOfDate returns the beginning date of a time.
 func EndingOfDate(t time.Time) time.Time {
 	return time.Date(t.Year(), t.Month(), t.Day(), 23, 59, 59, 0, t.Location())
