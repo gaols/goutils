@@ -26,7 +26,7 @@ func BeginningOfWeek(t time.Time) time.Time {
 
 // EndingOfDate returns the beginning date of a time.
 func EndingOfDate(t time.Time) time.Time {
-	return time.Date(t.Year(), t.Month(), t.Day(), 23, 59, 59, 0, t.Location())
+	return time.Date(t.Year(), t.Month(), t.Day(), 23, 59, 59, int(time.Second-time.Nanosecond), t.Location())
 }
 
 // Yesterday returns the beginning date of yesterday.
