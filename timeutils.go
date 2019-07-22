@@ -38,6 +38,18 @@ func convertLayout(layout string) string {
 		parsedLayout = "2006/01"
 	case "/date--":
 		parsedLayout = "2006"
+	case ".datetime":
+		parsedLayout = "2006.01.02 15:04:05"
+	case ".datetime-":
+		parsedLayout = "2006.01.02 15:04"
+	case ".datetime--":
+		parsedLayout = "2006.01.02 15"
+	case ".date":
+		parsedLayout = "2006.01.02"
+	case ".date-":
+		parsedLayout = "2006.01"
+	case ".date--":
+		parsedLayout = "2006"
 	case "time":
 		parsedLayout = "15:04:05"
 	case "time-":
