@@ -168,17 +168,6 @@ func Substring(str string, i, j int) string {
 	return str
 }
 
-func JoinSqlInParam(ins []string) string {
-	if len(ins) <= 0 {
-		panic("input params required")
-	}
-	ins2 := make([]string, 0)
-	for _, v := range ins {
-		ins2 = append(ins2, "'"+v+"'")
-	}
-	return "(" + strings.Join(ins2, ",") + ")"
-}
-
 // IsEqualsAny tests whether a string equals any string provided.
 func IsEqualsAny(val string, vals ...string) bool {
 	for _, v := range vals {
