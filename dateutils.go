@@ -45,7 +45,13 @@ func BeginningOfYear(t time.Time) time.Time {
 }
 
 // EndingOfDate returns the ending nano of a date where t belongs to.
+// Deprecated: Use EndOfDate instead.
 func EndingOfDate(t time.Time) time.Time {
+	return EndOfDate(t)
+}
+
+// EndOfDate returns the ending nano of a date where t belongs to.
+func EndOfDate(t time.Time) time.Time {
 	return time.Date(t.Year(), t.Month(), t.Day(), 23, 59, 59, int(time.Second-time.Nanosecond), t.Location())
 }
 
