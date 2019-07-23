@@ -9,8 +9,10 @@ import (
 )
 
 const (
-	TYPE_STDOUT = 0
-	TYPE_STDERR = 1
+	// TypeStdout is type of stdout
+	TypeStdout = 0
+	// TypeStderr is type of stderr
+	TypeStderr = 1
 )
 
 // Local run the command in localhost
@@ -48,10 +50,10 @@ func RtLocal(localCmd string, lineHandler func(line string, lineType int8), para
 		stdoutScanner := bufio.NewScanner(stdout)
 		stderrScanner := bufio.NewScanner(stderr)
 		for stdoutScanner.Scan() {
-			lineHandler(stdoutScanner.Text(), TYPE_STDOUT)
+			lineHandler(stdoutScanner.Text(), TypeStdout)
 		}
 		for stderrScanner.Scan() {
-			lineHandler(stderrScanner.Text(), TYPE_STDERR)
+			lineHandler(stderrScanner.Text(), TypeStderr)
 		}
 		ch <- 1
 	}()
