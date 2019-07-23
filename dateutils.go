@@ -14,19 +14,49 @@ func BeginningOfThisWeek() time.Time {
 	return BeginningOfWeek(time.Now())
 }
 
+// BeginningOfThisMonth returns the first date of this month.
+func BeginningOfThisMonth() time.Time {
+	return BeginningOfMonth(time.Now())
+}
+
+// BeginningOfThisYear returns the first date of this year.
+func BeginningOfThisYear() time.Time {
+	return BeginningOfYear(time.Now())
+}
+
+// BeginningOfMonth returns the first date of a month where t belongs to.
+func BeginningOfMonth(t time.Time) time.Time {
+	return time.Date(t.Year(), t.Month(), 1, 0, 0, 0, 0, t.Location())
+}
+
 // BeginningOfWeek return the first date of the week where t belongs to.
 func BeginningOfWeek(t time.Time) time.Time {
 	wd := int(t.Weekday())
 	if wd == 0 {
 		wd = 7
 	}
-	d := t.AddDate(0, 0, -wd + 1)
+	d := t.AddDate(0, 0, -wd+1)
 	return BeginningOfDate(d)
 }
 
-// EndingOfDate returns the beginning date of a time.
+// BeginningOfYear returns the first date of a year where t belongs to.
+func BeginningOfYear(t time.Time) time.Time {
+	return time.Date(t.Year(), time.January, 1, 0, 0, 0, 0, t.Location())
+}
+
+// EndingOfDate returns the ending nano of a date where t belongs to.
 func EndingOfDate(t time.Time) time.Time {
 	return time.Date(t.Year(), t.Month(), t.Day(), 23, 59, 59, int(time.Second-time.Nanosecond), t.Location())
+}
+
+// EndOfThisMonth returns the last date of this month.
+func EndOfThisMonth() time.Time {
+	return BeginningOfThisMonth().AddDate(0, 1, 0).Add(-time.Nanosecond)
+}
+
+// EndOfThisYear returns the last date of this year.
+func EndOfThisYear() time.Time {
+	return BeginningOfThisYear().AddDate(1, 0, 0).Add(-time.Nanosecond)
 }
 
 // Yesterday returns the beginning date of yesterday.
