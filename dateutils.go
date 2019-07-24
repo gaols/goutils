@@ -19,6 +19,21 @@ func BeginningOfThisMonth() time.Time {
 	return BeginningOfMonth(time.Now())
 }
 
+// LastWeek returns monday of last week.
+func LastWeek() time.Time {
+	return BeginningOfThisWeek().AddDate(-7, 0, 0)
+}
+
+// LastMonth returns the first date of last month.
+func LastMonth() time.Time {
+	return BeginningOfThisMonth().AddDate(0, -1, 0)
+}
+
+// LastYear returns the first date of last year.
+func LastYear() time.Time {
+	return BeginningOfThisYear().AddDate(0, -1, 0)
+}
+
 // BeginningOfThisYear returns the first date of this year.
 func BeginningOfThisYear() time.Time {
 	return BeginningOfYear(time.Now())
