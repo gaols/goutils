@@ -43,11 +43,13 @@ date utils has a lot of date related sugar methods.
 
 ```go
 goutils.Today()
-goutils.Yestery()
+goutils.Yesterday()
 goutils.BeginningOfThisWeek()
 goutils.BeginningOfThisMonth()
 goutils.BeginningOfThisYear()
 goutils.LastWeek()
+goutils.LastMonth()
+goutils.LastYear()
 // ... and many others
 ```
 
