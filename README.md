@@ -2,7 +2,7 @@
 
 ## Description
 
-Some common used utilities to make your development more productive.
+Some common utilities to make your development more productive.
 It's self contained, no other dependencies is required.
 
 ## Install
