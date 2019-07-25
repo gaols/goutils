@@ -7,7 +7,7 @@ It's self contained, no other dependencies is required.
 
 ## Install
 
-```
+```shell
 go get github.com/gaols/goutils
 ```
 
@@ -37,9 +37,24 @@ goutils.IsAnyBlank("hello", "")       // out: true
 goutils.IsAnyBlank("hello")           // out: false
 ```
 
+### dateutils
+
+date utils has a lot of date related sugar methods.
+
+```go
+goutils.Today()
+goutils.Yestery()
+goutils.BeginningOfThisWeek()
+goutils.BeginningOfThisMonth()
+goutils.BeginningOfThisYear()
+goutils.LastWeek()
+// ... and many others
+```
+
 ### timeutils
 
 ```go
+// assumes time now is: 2017-12-27 21:15:15
 goutils.FmtTime(time.Now(), "-datetime")      // out: 2017-12-27 21:15:15
 goutils.FmtTime(time.Now(), "-datetime-")     // out: 2017-12-27 21:15
 goutils.FmtTime(time.Now(), "-datetime--")    // out: 2017-12-27 21
@@ -52,6 +67,11 @@ goutils.FmtTime(time.Now(), "/datetime")      // out: 2017/12/27 21:15:15
 goutils.FmtTime(time.Now(), "/datetime-")     // out: 2017/12/27 21:15
 goutils.FmtTime(time.Now(), "/datetime--")    // out: 2017/12/27 21
 goutils.FmtTime(time.Now(), "/date")          // out: 2017/12/27
+
+goutils.FmtTime(time.Now(), ".datetime")      // out: 2017.12.27 21:15:15
+goutils.FmtTime(time.Now(), ".datetime-")     // out: 2017.12.27 21:15
+goutils.FmtTime(time.Now(), ".datetime--")    // out: 2017.12.27 21
+goutils.FmtTime(time.Now(), ".date")          // out: 2017.12.27
 
 goutils.FmtTime(time.Now(), "xzzz")           // error
 goutils.MustFmtTime(time.Now(), "xzzz")       // panic
