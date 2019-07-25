@@ -2,6 +2,7 @@ package goutils
 
 import (
 	"fmt"
+	"reflect"
 	"strconv"
 )
 
@@ -10,32 +11,31 @@ func Str2Int(str string) (int, error) {
 	return strconv.Atoi(str)
 }
 
-// ToInt convert string and any other int types to int.
+// Int2Str convert int to string.
+func Int2Str(i int) string {
+	return strconv.Itoa(i)
+}
+
+// ToInt convert string and any other int/float types to int.
+// Warning: the result my be truncated if number overflows int.
 func ToInt(v interface{}) (int, error) {
 	switch v.(type) {
 	case string:
 		return Str2Int(v.(string))
-	case int:
-		return v.(int), nil
-	case int8:
-		return int(v.(int8)), nil
-	case int32:
-		return int(v.(int32)), nil
-	case int64:
-		return int(v.(int64)), nil
-	case uint8:
-		return int(v.(uint8)), nil
-	case uint32:
-		return int(v.(uint32)), nil
-	case uint64:
-		return int(v.(uint64)), nil
+	case int, int8, int16, int32, int64:
+		return int(reflect.ValueOf(v).Int()), nil
+	case uint, uint8, uint16, uint32, uint64:
+		return int(reflect.ValueOf(v).Uint()), nil
+	case float32, float64:
+		return int(reflect.ValueOf(v).Float()), nil
 	}
 
 	return -1, fmt.Errorf("cannot parse value: %v", v)
 }
 
-// ToIntWithDefault tries to convert string and any other int types to int, 
+// ToIntWithDefault tries to convert string and any other int types to int,
 // return a default value provided if error occurs.
+// Warning: the result my be truncated if number overflows int.
 func ToIntWithDefault(v interface{}, defVal int) int {
 	ret, err := ToInt(v)
 	if err == nil {
