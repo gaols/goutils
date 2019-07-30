@@ -3,7 +3,7 @@ package goutils
 import "strings"
 
 // Escape the sql to prevent sql injection.
-// Simply a copy from https://gist.github.com/gaols/b2a85c9a109932e568642864becdc933
+// Simply a copy from https://gist.github.com/siddontang/8875771
 func Escape(sql string) string {
 	dest := make([]byte, 0, 2*len(sql))
 	var escape byte
