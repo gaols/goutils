@@ -19,3 +19,19 @@ func SumInt(a ...int) int {
 func SumIntSlice(s []int) int {
 	return SumInt(s...)
 }
+
+// MaxInt guess the max int value.
+func MaxInt() int {
+	var v int
+	v = 1
+	var bits uint = 1
+	for {
+		v <<= 1
+		if v < 0 {
+			break
+		}
+		bits++
+	}
+
+	return (1 << bits) - 1
+}
