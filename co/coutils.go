@@ -1,6 +1,10 @@
 package co
 
-import "sync"
+import (
+	"errors"
+	"runtime/debug"
+	"sync"
+)
 
 // Job abstract a job which can be executed by PoolJobs.
 type Job interface {
@@ -29,7 +33,17 @@ func PoolJobs(jobs []Job, concurrency int, stopOnErr bool, retHandler func(job J
 		sem <- true
 		go func(j Job) {
 			defer func() { <-sem }()
-			ret, err := j.Run()
+			var ret interface{}
+			var err error
+			func() {
+				defer func() {
+					if r := recover(); r != nil {
+						err = errors.New(string(debug.Stack()))
+					}
+				}()
+				ret, err = j.Run()
+			}()
+
 			if err != nil {
 				mux.Lock()
 				hasErr = true
