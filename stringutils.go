@@ -4,6 +4,7 @@ import (
 	"strings"
 	"unicode/utf8"
 	"unicode"
+	"github.com/fatih/color"
 )
 
 // IsBlank Checks if a string is whitespace, empty ("").
@@ -176,4 +177,14 @@ func IsEqualsAny(val string, vals ...string) bool {
 		}
 	}
 	return false
+}
+
+// GreenText prints green colored text.
+func GreenText(format string, a ...interface{}) {
+	color.Green(format, a...)
+}
+
+// RedText prints red colored text.
+func RedText(format string, a ...interface{}) {
+	color.Red(format, a...)
 }

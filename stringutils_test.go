@@ -201,3 +201,7 @@ func TestIsEqualsAny(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func Test_GreenText(t *testing.T) {
+	GreenText("hello %s", "gaols")
+}
