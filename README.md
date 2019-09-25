@@ -78,3 +78,22 @@ goutils.FmtTime(time.Now(), "xzzz")           // error
 goutils.MustFmtTime(time.Now(), "xzzz")       // panic
 goutils.MustParseTime("2017-12-27", "-date")  // time object@2017-12-27
 ```
+
+## terminal color utils
+
+```go
+goutils.GreenText("%s is very cool", "something")
+goutils.RedText("this text will be red")
+```
+
+if more colorized text is required, use [github.com/fatih/color](github.com/fatih/color) instead.
+
+## input utils
+
+`goutils.Confirm` will block the program and force user to make a choice before doing any other things. 
+
+```go
+goutils.Confirm("are you sure(y/n)?", []string {"y"}, []string {"n"}, func() {
+  // do something when user input 'n'
+})
+```
