@@ -15,7 +15,7 @@ const (
 	TimeUnitTypeHour int = 2
 )
 
-// RandDuration generate presudo time duration between lower and upper with lower and upper bound inclusively.
+// RandDuration generate pseudo time duration between lower and upper with lower and upper bound inclusively.
 func RandDuration(lower, upper, timeUnitType int) time.Duration {
 	if upper < lower {
 		panic("upper bound should gt lower bound")
