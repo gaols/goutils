@@ -65,7 +65,7 @@ func convertLayout(layout string) string {
 func FmtTime(time time.Time, layout string) (string, error) {
 	parsedLayout := convertLayout(layout)
 	if strings.TrimSpace(parsedLayout) == "" {
-		return "", fmt.Errorf("Invalid layout format: %s", layout)
+		return "", fmt.Errorf("invalid layout format: %s", layout)
 	}
 
 	return time.Format(parsedLayout), nil
@@ -87,7 +87,7 @@ func MustFmtTime(time time.Time, layout string) string {
 func ParseLocaltime(toParseTime, layout string) (time.Time, error) {
 	parsedLayout := convertLayout(layout)
 	if strings.TrimSpace(parsedLayout) == "" {
-		return time.Time{}, fmt.Errorf("Invalid layout format: %s", layout)
+		return time.Time{}, fmt.Errorf("invalid layout format: %s", layout)
 	}
 
 	return time.ParseInLocation(parsedLayout, toParseTime, time.Now().Location())
