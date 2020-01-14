@@ -3,7 +3,6 @@
 ## Description
 
 Some common utilities to make your development more productive.
-if it is helpful, don't be afraid to give a star :sparkling_heart:
 
 ## Install
 
