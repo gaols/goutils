@@ -21,7 +21,7 @@ const (
 func Local(localCmd string, paras ...interface{}) (out string, err error) {
 	localCmd = fmt.Sprintf(localCmd, paras...)
 	cmd := exec.Command("/bin/bash", "-c", localCmd)
-	ret, err := cmd.Output()
+	ret, err := cmd.CombinedOutput()
 	out = string(ret)
 	return
 }
